@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/default.css}" />
+<head>
+<meta charset="ISO-8859-1" />
+<title>Upload and Download</title>
+</head>
+<body>
+	<div class="container">
+		<div class="upload_form_cont" align="center">
+			<form id="upload_form" method="POST" action="/uploadFile"
+				enctype="multipart/form-data">
+				<div>
+					<div>
+						<label for="image_file">you can select the file and click
+							Upload button</label>
+						<p th:text="${message}" style="text-align: center; color: blue;"></p>
+					</div>
+					<div>
+						<p>
+							<label>Name * </label> <input type="text" name="name" />
+						</p>
+						<input type="file" name="file" id="image_file" />
+					</div>
+				</div>
+				<div>
+					<input type="submit" value="Upload" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class='main'>
+		<section class="content">
+			<h1>Table Content</h1>
+		</section>
+		<table class="heavyTable">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>NAME</th>
+					<th>DOCS</th>
+					<th>DOCID</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}">
+					<td th:text="${user.id}"></td>
+					<td th:text="${user.name}"></td>
+					<td><a th:href="@{'downloadFile?id=' + ${user.id}}"><img
+							th:src="@{/images/doc.jpg}" height="30px" width="50px" /></a></td>
+					<td th:text="${user.fileID}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
